@@ -1,0 +1,17 @@
+# .github/workflows/test-run.yml
+name: Self-Hosted Runner Test
+
+on:
+  push:
+    branches:
+      - main  # or your default branch name
+
+jobs:
+  test-job:
+    runs-on: [self-hosted]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Run a test command
+        run: echo "Self-hosted runner is working!"
