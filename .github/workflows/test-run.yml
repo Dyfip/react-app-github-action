@@ -30,7 +30,7 @@ jobs:
         run: npm test
 
       - name: Upload build artifacts (optional)
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: build
           path: _dist  # Path to your build folder
