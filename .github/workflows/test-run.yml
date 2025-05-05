@@ -1,17 +1,36 @@
-# .github/workflows/test-run.yml
-name: Self-Hosted Runner Test
+name: React App CI/CD
 
 on:
   push:
     branches:
-      - main  # or your default branch name
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
-  test-job:
-    runs-on: [self-hosted]
+  build:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
-      - name: Run a test command
-        run: echo "Self-hosted runner is working!"
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'  # Or any other version you're using
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run build
+        run: npm run build
+
+      - name: Run tests
+        run: npm test
+
+      - name: Upload build artifacts (optional)
+        uses: actions/upload-artifact@v2
+        with:
+          name: build
+          path: _dist  # Path to your build folder
